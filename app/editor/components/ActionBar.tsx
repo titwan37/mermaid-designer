@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function ActionBar({ code, onLoad }: Props) {
-  const previewRef = React.useRef<HTMLDivElement>(null);
+  //const previewRef = React.useRef<HTMLDivElement>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

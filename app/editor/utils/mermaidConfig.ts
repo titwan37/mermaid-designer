@@ -14,9 +14,12 @@ export function parseFrontMatter(mmd: string): {
   config: MermaidConfig;
   diagram: string;
 } {
-  const fmMatch = mmd.match(/^---\n([\s\S]*?)\n---\n/);
+  // Sanitize non-breaking spaces (\u00A0) which often break the Mermaid lexer
+  const sanitized = mmd.replace(/\u00A0/g, " ");
+
+  const fmMatch = sanitized.match(/^---\n([\s\S]*?)\n---\n/);
   if (!fmMatch) {
-    return { config: {}, diagram: mmd };
+    return { config: {}, diagram: sanitized };
   }
   try {
     // eslint-disable-next-line @typescript-eslint/no-var-requires

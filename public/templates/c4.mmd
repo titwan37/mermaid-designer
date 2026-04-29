@@ -1,8 +1,37 @@
 ---
 config:
   theme: neutral
+  themeVariables:
+    fontFamily: "'Source Code Pro', monospace"
 ---
 C4Context
-  Person(customer, "Banking Customer", "A user of the bank")
-  System(banking, "Main Banking System", "Handles all transactions")
-  Rel(customer, banking, "Uses", "HTTPS")
+    %% title 🏦 Core Banking Platform - System Context
+
+    %% 1. The Primary Actor
+    Person(customer, "Retail Customer", "A user of the bank with personal accounts.")
+
+    %% 2. The Enterprise Boundary (Grouping internal systems)
+    Enterprise_Boundary(b0, "Fintech Enterprise") {
+        System(banking, "Mobile Banking App", "Provides all core banking functionalities to the user.")
+        SystemDb(ledger, "Transactional Ledger", "Stores sensitive financial data and ledgers.")
+    }
+
+    %% 3. External Systems (Dependencies outside our control)
+    System_Ext(mainframe, "Legacy Mainframe", "Legacy core banking system.")
+    System_Ext(email, "Notification Service", "Sends out emails and SMS alerts.")
+
+    %% 4. Relationships (Rel(From, To, Label, Protocol))
+    Rel(customer, banking, "Views balances & transfers funds", "HTTPS/REST")
+    Rel(banking, ledger, "Reads & Writes transactions", "TCP/IP")
+    Rel(banking, email, "Triggers transaction alerts", "gRPC")
+    Rel(ledger, mainframe, "Nightly batch synchronization", "SFTP")
+    Rel(email, customer, "Sends notifications to", "SMTP/SMS")
+
+    %% 5. Professional C4 Styling (Color Coding the Importance)
+    %% User = Blue, Primary System = Purple, Database = Green
+    UpdateElementStyle(customer, $fontColor="white", $bgColor="#0ea5e9", $borderColor="#0284c7")
+    UpdateElementStyle(banking, $fontColor="white", $bgColor="#8b5cf6", $borderColor="#7c3aed")
+    UpdateElementStyle(ledger, $fontColor="white", $bgColor="#10b981", $borderColor="#059669")
+    
+    %% Highlight the main interaction line
+    UpdateRelStyle(customer, banking, $textColor="#8b5cf6", $lineColor="#8b5cf6")

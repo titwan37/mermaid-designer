@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" className={dark ? "dark" : ""} suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <ThemeContext.Provider value={{ dark, toggle, mounted }}>
           {children}
         </ThemeContext.Provider>

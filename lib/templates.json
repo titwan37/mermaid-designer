@@ -1,38 +1,281 @@
 [
   {
-    "id": "flowchart-advanced",
-    "title": "Advanced Flowchart",
-    "category": "Flowchart",
-    "thumbnailSvg": "flowchart",
-    "path": "/mermaid-designer/templates/flowchart_advanced.mmd",
-    "description": "A sophisticated flow-chart with custom styling, perfect for system overviews.",
-    "useCases": [
-      "Architecture",
-      "Process Mapping"
-    ]
+    "id": "c4container",
+    "title": "Data Platform C4 Container",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/c4container.mmd",
+    "description": "C4 Container model of a modern AI-Powered Medallion Data Platform.",
+    "useCases": ["System Architecture", "Data Engineering"]
   },
   {
-    "id": "c4-container",
-    "title": "C4 Container",
-    "category": "C4",
-    "thumbnailSvg": "architecture",
-    "path": "/mermaid-designer/templates/c4container.mmd",
-    "description": "Container-level C4 diagram for service-oriented designs.",
-    "useCases": [
-      "Software Architecture",
-      "Micro-services"
-    ]
+    "id": "flowchart-advanced",
+    "title": "ML Pipeline Flowchart",
+    "category": "Flowchart",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/flowchart_advanced.mmd",
+    "description": "Advanced flowchart visualizing Medallion architecture and ML serving pipelines.",
+    "useCases": ["MLOps", "Data Pipelines"]
+  },
+  {
+    "id": "architecture",
+    "title": "Cloud AI Architecture",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/architecture.mmd",
+    "description": "High-level cloud architecture for AI service deployment.",
+    "useCases": ["Cloud Deployment", "Infrastructure"]
+  },
+  {
+    "id": "block",
+    "title": "System Block Diagram",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/block.mmd",
+    "description": "Block diagram showing core processing layers and data ingestion.",
+    "useCases": ["System Design", "Component Overview"]
+  },
+  {
+    "id": "sankey",
+    "title": "Data Flow Sankey",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/sankey.mmd",
+    "description": "Visualize data lineage, token usage, or resource allocation flows.",
+    "useCases": ["Data Lineage", "Resource Tracking"]
+  },
+  {
+    "id": "er",
+    "title": "Entity Relationship",
+    "category": "Database",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/er.mmd",
+    "description": "Data modeling for relational databases and feature stores.",
+    "useCases": ["Data Modeling", "Database Design"]
+  },
+  {
+    "id": "data-engineer-journey",
+    "title": "Data Engineer Workflow",
+    "category": "Journey",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/data_engineer_journey.mmd",
+    "description": "User journey mapping the daily workflow of a Data Engineer.",
+    "useCases": ["UX/DX", "Workflow Analysis"]
+  },
+  {
+    "id": "mindmap",
+    "title": "AI Feature Mindmap",
+    "category": "Ideation",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/mindmap.mmd",
+    "description": "Hierarchical brainstorming tool for AI capabilities and model features.",
+    "useCases": ["Brainstorming", "Feature Planning"]
+  },
+  {
+    "id": "wardley",
+    "title": "AI Strategy Wardley Map",
+    "category": "Strategy",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/wardley.mmd",
+    "description": "Strategic mapping of AI components from genesis to commodity.",
+    "useCases": ["Tech Strategy", "Market Analysis"]
+  },
+  {
+    "id": "git",
+    "title": "GitOps Branching",
+    "category": "DevOps",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/git.mmd",
+    "description": "Version control branching strategies for CI/CD and MLOps.",
+    "useCases": ["GitOps", "Version Control"]
+  },
+  {
+    "id": "timeline-advanced",
+    "title": "Platform Roadmap",
+    "category": "Planning",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/timeline-advanced.mmd",
+    "description": "Advanced timeline charting the evolution of a data platform.",
+    "useCases": ["Roadmapping", "Strategic Planning"]
+  },
+  {
+    "id": "quadrant",
+    "title": "Model Evaluation Quadrant",
+    "category": "Analysis",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/quadrant.mmd",
+    "description": "Prioritize AI models by comparing effort versus impact.",
+    "useCases": ["Prioritization", "Model Selection"]
+  },
+  {
+    "id": "sequence",
+    "title": "API Sequence Diagram",
+    "category": "Integration",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/sequence.mmd",
+    "description": "Detailed interaction flow between microservices and LLM endpoints.",
+    "useCases": ["API Design", "Microservices"]
+  },
+  {
+    "id": "state",
+    "title": "Model State Machine",
+    "category": "Logic",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/state.mmd",
+    "description": "State transitions for training, evaluation, and serving pipelines.",
+    "useCases": ["State Management", "Pipeline Logic"]
   },
   {
     "id": "radar",
-    "title": "Academic Radar",
-    "category": "Radar",
-    "thumbnailSvg": "chart",
+    "title": "Performance Radar",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
     "path": "/mermaid-designer/templates/radar.mmd",
-    "description": "A radar chart visualising performance across multiple subjects.",
-    "useCases": [
-      "Education",
-      "Metrics"
-    ]
+    "description": "Multi-dimensional performance comparison for model benchmarking.",
+    "useCases": ["Benchmarking", "Metrics"]
+  },
+  {
+    "id": "c4",
+    "title": "C4 Context",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/c4.mmd",
+    "description": "High-level C4 context diagram for system interactions.",
+    "useCases": ["System Context", "Stakeholder Alignment"]
+  },
+  {
+    "id": "class",
+    "title": "Class Diagram",
+    "category": "Development",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/class.mmd",
+    "description": "Object-oriented class structures for software engineering.",
+    "useCases": ["OOP Design", "Code Structure"]
+  },
+  {
+    "id": "packet",
+    "title": "Network Packet",
+    "category": "Infrastructure",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/packet.mmd",
+    "description": "Visualize network protocols, bit fields, and custom packet structures.",
+    "useCases": ["Networking", "Protocol Design"]
+  },
+  {
+    "id": "requirement",
+    "title": "System Requirements",
+    "category": "Engineering",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/requirement.mmd",
+    "description": "Formal requirement mapping and traceability for complex systems.",
+    "useCases": ["Systems Engineering", "Compliance"]
+  },
+  {
+    "id": "kanban",
+    "title": "Agile Kanban Board",
+    "category": "Agile",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/kanban.mmd",
+    "description": "Visual task management and agile sprint tracking.",
+    "useCases": ["Project Management", "Agile"]
+  },
+  {
+    "id": "gantt",
+    "title": "Project Gantt Chart",
+    "category": "Planning",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/gantt.mmd",
+    "description": "Project scheduling, dependencies, and critical path analysis.",
+    "useCases": ["Scheduling", "Project Management"]
+  },
+  {
+    "id": "xychart",
+    "title": "Statistical XY Chart",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/xychart.mmd",
+    "description": "Bar and line charts for statistical data visualization.",
+    "useCases": ["Data Visualization", "Reporting"]
+  },
+  {
+    "id": "pie",
+    "title": "Distribution Pie Chart",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/pie.mmd",
+    "description": "Simple proportional distribution visualization.",
+    "useCases": ["Analytics", "Reporting"]
+  },
+  {
+    "id": "ishikawa",
+    "title": "Ishikawa (Fishbone)",
+    "category": "Analysis",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/ishikawa.mmd",
+    "description": "Root cause analysis diagram for troubleshooting systemic issues.",
+    "useCases": ["Troubleshooting", "Quality Control"]
+  },
+  {
+    "id": "ishikawa-beta",
+    "title": "Ishikawa Beta",
+    "category": "Analysis",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/ishikawa_beta.mmd",
+    "description": "Alternative rendering for Fishbone root-cause diagrams.",
+    "useCases": ["Troubleshooting", "Analysis"]
+  },
+  {
+    "id": "timeline",
+    "title": "Basic Timeline",
+    "category": "Planning",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/timeline.mmd",
+    "description": "Simple sequential timeline for historical events or simple plans.",
+    "useCases": ["History", "Simple Planning"]
+  },
+  {
+    "id": "treemap",
+    "title": "Hierarchical Treemap",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/treemap.mmd",
+    "description": "Visualize hierarchical data as a set of nested rectangles.",
+    "useCases": ["Data Visualization", "Hierarchy"]
+  },
+  {
+    "id": "treeview",
+    "title": "Directory Treeview",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/treeview.mmd",
+    "description": "Represent file systems, organizational charts, or nested structures.",
+    "useCases": ["File Structure", "Org Charts"]
+  },
+  {
+    "id": "user-journey",
+    "title": "User Journey Map",
+    "category": "Journey",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/user_journey.mmd",
+    "description": "Track user sentiment and actions across a product experience.",
+    "useCases": ["UX Research", "Product Management"]
+  },
+  {
+    "id": "venn",
+    "title": "Venn Diagram",
+    "category": "Analysis",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/venn.mmd",
+    "description": "Logical sets and their intersections.",
+    "useCases": ["Set Theory", "Comparisons"]
+  },
+  {
+    "id": "zenuml",
+    "title": "ZenUML Sequence",
+    "category": "Integration",
+    "thumbnailSvg": "dynamic",
+    "path": "/mermaid-designer/templates/zenuml.mmd",
+    "description": "Fast and clean sequence diagrams using the ZenUML syntax.",
+    "useCases": ["API Design", "Rapid Prototyping"]
   }
 ]

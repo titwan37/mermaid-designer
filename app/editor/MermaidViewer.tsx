@@ -35,20 +35,33 @@ export default function MermaidViewer({ mmd, setError }: Props) {
     const renderDiagram = async () => {
       try {
         if (containerRef.current) containerRef.current.innerHTML = "";
+        
+        // 🛡️ GUARD: Ensure we have valid Mermaid code before rendering
+        if (!diagram || diagram.trim() === "") {
+          setSvg("");
+          return;
+        }
+
         const renderId = `mermaid-svg-${Date.now()}`;
         const { svg: renderedSvg } = await mermaid.render(renderId, diagram);
         setSvg(renderedSvg);
       } catch (e: any) {
+        // 🛡️ HYPER-SAFE FIX: Extract only the string message to prevent circular JSON crashes
         let errorMessage = "Mermaid render error";
-        if (typeof e === "string") errorMessage = e;
-        else if (e?.message) errorMessage = e.message;
-        else if (e?.str) errorMessage = e.str;
-        // Inside your renderDiagram catch block:
-        if (e && errorMessage.includes("Lexical error")) {
-          setError("Syntax Hint: Check for unexpected characters or spaces before symbols like '<' or '('");
-        } else {
-          setError(errorMessage);
+        try {
+          errorMessage = e?.message || e?.str || String(e);
+        } catch (sfe) {
+          errorMessage = "A non-serializable error occurred in the Mermaid parser.";
         }
+        
+        if (errorMessage.includes("Lexical error") || errorMessage.includes("Parse error")) {
+          setError("Syntax Hint: Check for unexpected characters or formatting in your diagram code.");
+        } else {
+          setError(errorMessage.slice(0, 200)); // Truncate to keep it safe
+        }
+        
+        // Use a flat string concatenation to avoid any object-tracing by dev tools
+        console.warn("[Mermaid Viewer Error]: " + errorMessage.slice(0, 100));
         setSvg("");
       } finally {
         // Automatically fit the view once the SVG is injected

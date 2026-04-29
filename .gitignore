@@ -16,6 +16,8 @@
 # misc
 .DS_Store
 *.pem
+inventory.ini
+config.ini
 
 # debug
 npm-debug.log*

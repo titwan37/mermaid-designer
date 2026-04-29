@@ -9,14 +9,14 @@ export interface MermaidTemplate {
   title: string;
   /** Category for filtering (e.g. "Architecture", "Strategy", "Flowchart") */
   category: string;
-  /** Path (relative to /public) of a small SVG thumbnail */
+  /** Key for the built-in IconMapper */
   thumbnailSvg: string;
+  /** Absolute path to the source .mmd file */
+  path: string;
   /** Short description displayed in the gallery */
   description: string;
   /** Use‑case tags that appear as pill badges */
   useCases: string[];
-  /** The actual Mermaid source that should be loaded in the editor */
-  mermaidCode: string;
 }
 
 /** 

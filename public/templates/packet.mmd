@@ -1,0 +1,27 @@
+---
+config:
+  theme: neutral
+  themeVariables:
+    fontFamily: "'Source Code Pro', monospace"
+    # Stable way to inject colors for packet blocks
+    # We use the generic theme variables to ensure the parser doesn't crash
+    primaryColor: "#eff6ff"
+    primaryBorderColor: "#1e40af"
+    primaryTextColor: "#1e40af"
+  packet:
+    columns: 4
+    fontSize: "14px"
+---
+packet-beta
+  0-15: "Source Port"
+  16-31: "Destination Port"
+  32-47: "Length"
+  48-63: "Identification"
+  64-65: "DF"
+  66: "MF"
+  67-79: "Fragment Offset"
+  80-87: "TTL"
+  88-95: "Protocol"
+  96-111: "Header Checksum"
+  112-143: "Source IP Address"
+  144-175: "Destination IP Address"

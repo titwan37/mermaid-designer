@@ -1,0 +1,42 @@
+---
+config:
+  theme: neutral
+  look: handDrawn
+  themeVariables:
+    fontFamily: "'Source Code Pro', monospace"
+    mainBkg: "#ffffff"
+    clusterBkg: "#f8fafc"
+    clusterBorder: "#cbd5e1"
+    lineColor: "#6366f1"
+---
+block-beta
+    columns 1
+
+    %% Top Level Database
+    db(("Main Database"))
+
+    %% Downward flow
+    blockArrow<"Ingest">(down)
+
+    %% Inner Processing Layer
+    block:ProcessingLayer
+        columns 3
+        A["Validation"]
+        B["Transformation<br/>Engine"]
+        C["Encryption"]
+    end
+
+    %% Downward flow
+    blockArrow<"Serve">(down)
+
+    %% Final Output
+    D["Analytics API"]
+
+    %% Connections
+    db --> ProcessingLayer
+    ProcessingLayer --> D
+
+    %% Styling (Standard way for block-beta)
+    style db fill:#eef2ff,stroke:#4338ca,stroke-width:2px
+    style D fill:#f0fdf4,stroke:#15803d,stroke-width:2px
+    style ProcessingLayer fill:#f1f5f9,stroke:#94a3b8,stroke-dasharray: 5 5

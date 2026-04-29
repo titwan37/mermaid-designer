@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light Mode: Clean White/Soft Grey */
+  --foreground-rgb: 9, 9, 11;
+  /* Zinc-950 */
+  --background-start-rgb: 250, 250, 250;
+  /* Zinc-50 */
+  --background-end-rgb: 255, 255, 255;
+}
+
+.dark {
+  /* Dark Mode: Neutral Professional Grey (Zinc) */
+  --foreground-rgb: 244, 244, 245;
+  /* Zinc-100 */
+  --background-start-rgb: 24, 24, 27;
+  /* Zinc-900 */
+  --background-end-rgb: 9, 9, 11;
+  /* Zinc-950 */
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      rgb(var(--background-start-rgb)),
+      rgb(var(--background-end-rgb)));
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant User
+    participant Editor
+    participant Renderer
+    
+    User->>Editor: Paste MMD
+    Editor->>Renderer: Debounced Update
+    Renderer-->>Editor: SVG output
+    Editor->>User: Display Preview

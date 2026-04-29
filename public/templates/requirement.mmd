@@ -1,0 +1,49 @@
+---
+config:
+  theme: neutral
+  themeVariables:
+    fontFamily: "'Source Code Pro', monospace"
+    # Colors from your screenshot
+    requirementTitleColor: "#111827"
+    requirementTextColor: "#374151"
+    requirementBg: "#ffffff"
+    requirementBorder: "#9ca3af"
+    requirementHighRisk: "#dc2626"  # Red for High risk
+    requirementMediumRisk: "#f59e0b" # Orange for Medium risk
+    requirementLowRisk: "#10b981"  # Green for Low risk
+    requirementBoxPadding: 12
+    requirementBoxMargin: 8
+    requirementFontSize: "12px"
+---
+requirementDiagram
+    requirement test_req {
+    id: 1
+    text: the test text.
+    risk: high
+    verifymethod: test
+    }
+    requirement req2 {
+    id: 2
+    text: "Must handle 10,000 concurrent users"
+    risk: high
+    verifymethod: demonstration
+    }
+    requirement req3 {
+    id: 3
+    text: "UI must be in Spanish"
+    risk: medium
+    verifymethod: inspection
+    }
+    requirement req4 {
+    id: 4
+    text: "Login must use OAuth"
+    risk: low
+    verifymethod: inspection
+    }
+    requirement req5 {
+    id: 5
+    text: "System must be PCI compliant"
+    risk: high
+    verifymethod: analysis
+    }
+

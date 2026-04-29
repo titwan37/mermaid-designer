@@ -1,0 +1,24 @@
+---
+config:
+  theme: base
+  themeVariables:
+    fontFamily: "'Source Code Pro', monospace"
+    #  Curve 0 (Alice) - Green
+    radarCurveColor0: "#07aa2d"
+    #  Curve 1 (Bob) - Purple
+    radarCurveColor1: "#9486fd"
+    radarCurveFillOpacity: "0.3"
+    #  Grid/Web Colors
+    radarAxisLineColor: "#0f6ee1"
+    radarLevelLineColor: "#2767ba"
+    #  Fix for Neutral theme blocking text colors
+    textColor: "#374151"
+---
+radar-beta
+    title "Academic Performance"
+    axis m["Math"], s["Science"], e["English"]
+    axis h["History"], g["Geography"], a["Art"]
+    curve a["Alice"]{85, 90, 80, 70, 75, 90}
+    curve b["Bob"]{70, 75, 85, 80, 90, 85}
+    max 100
+    min 0

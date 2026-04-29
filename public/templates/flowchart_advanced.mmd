@@ -1,0 +1,90 @@
+---
+config:
+  layout: dagre
+  theme: neutral
+  look: classic
+  themeVariables:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "13px"
+---
+flowchart TD
+    %% ─── LOGICAL ZONES ───
+    
+    subgraph SourceZone ["📡 INGESTION SOURCES"]
+        direction LR
+        S1([EHR Systems])
+        S2([LIMS API])
+        S3([IoT Sensors])
+    end
+
+    subgraph Governance ["🔒 GOVERNANCE & METADATA"]
+        direction TB
+        G1([Consent Management])
+        G2[(Audit Trails)]
+        G3[/Data Catalog/]
+        G1 -.-> G2
+    end
+
+    subgraph Medallion ["🏅 MEDALLION DATA ARCHITECTURE"]
+        direction TB
+        subgraph Bronze ["🟫 BRONZE (RAW)"]
+            B1[("WORM Storage<br/>(Parquet)")]
+        end
+        
+        subgraph Silver ["🥈 SILVER (VALIDATED)"]
+            direction LR
+            V1{QA Gates}
+            S_Vault[("Data Vault<br/>Model")]
+            V1 -- Pass --> S_Vault
+        end
+        
+        subgraph Gold ["🥇 GOLD (SEMANTIC)"]
+            G_Set[("Feature Store<br/>& Datasets")]
+        end
+        
+        Bronze ==> Silver ==> Gold
+    end
+
+    subgraph AIServing ["🧠 AI & SERVING LAYER"]
+        direction LR
+        Vector[("Vector DB<br/>(RAG Context)")]
+        LLM{{LLM Prediction}}
+        Vector --> LLM
+    end
+
+    %% ─── CROSS-ZONE CONNECTIONS ───
+    SourceZone ==> Bronze
+    Gold ==> Vector
+    Governance -.-> Silver
+    Governance -.-> Gold
+    
+    %% ─── EXTENSIVE COLORFUL STYLING ───
+    
+    %% Governance: Greens
+    classDef gov fill:#f0fdf4,stroke:#166534,stroke-width:2px,color:#166534
+    class G1,G2,G3 gov
+    
+    %% Bronze: Purples
+    classDef bronze fill:#f5f3ff,stroke:#5b21b6,stroke-width:2px,color:#5b21b6
+    class B1 bronze
+    
+    %% Silver: Teals
+    classDef silver fill:#f0fdfa,stroke:#0f766e,stroke-width:2px,color:#0f766e
+    class V1,S_Vault silver
+    
+    %% Gold: Ambers
+    classDef gold fill:#fffbeb,stroke:#92400e,stroke-width:2px,color:#92400e
+    class G_Set gold
+    
+    %% AI: Blues
+    classDef ai fill:#eff6ff,stroke:#1e40af,stroke-width:2px,color:#1e40af
+    class Vector,LLM ai
+
+    %% Sources: Oranges
+    classDef source fill:#fff7ed,stroke:#9a3412,stroke-width:2px,color:#9a3412
+    class S1,S2,S3 source
+
+    %% Zone Styling
+    style SourceZone fill:#fafafa,stroke:#e5e7eb,stroke-dasharray: 5 5
+    style Governance fill:#fafafa,stroke:#e5e7eb,stroke-dasharray: 5 5
+    style Medallion fill:#f8fafc,stroke:#cbd5e1,stroke-width:3px

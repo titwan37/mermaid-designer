@@ -1,0 +1,12 @@
+---
+config:
+  theme: neutral
+---
+classDiagram
+    Animal <|-- Duck
+    Animal : +int age
+    Animal : +isMammal()
+    class Duck{
+        +String color
+        +swim()
+    }

@@ -1,0 +1,52 @@
+---
+config:
+  theme: neutral
+  options:
+    showBranches: true
+    showCommitLabels: true
+  themeVariables:
+    git0: "#7c7c7cff"
+    git1: "#238636"
+    git2: "#8957e5"
+    git3: "#d29922"
+    git4: "#db6d28"
+    git5: "#0ea5e9"
+    git6: "#f43f5e"
+    git7: "#10b981"
+    commitLabelFontSize: "12px"
+    gitBranchLabelFontSize: "12px"
+    tagLabelFontSize: "10px"
+---
+gitGraph
+    commit id: "Initial Project Setup"
+    commit id: "Add Bronze Schema"
+    
+    branch feature/silver-vault
+    checkout feature/silver-vault
+    commit id: "Draft Vault Model"
+    commit id: "Add QA Gates"
+    
+    checkout main
+    branch hotfix/security-patch
+    checkout hotfix/security-patch
+    commit id: "Fix mXSS" tag: "v1.0.1"
+    
+    checkout main
+    merge hotfix/security-patch
+    
+    checkout feature/silver-vault
+    commit id: "Finalize Silver Layer"
+    
+    branch feature/gold-analytics
+    checkout feature/gold-analytics
+    commit id: "Add PowerBI View"
+    
+    checkout main
+    merge feature/silver-vault
+    
+    checkout feature/gold-analytics
+    merge feature/silver-vault id: "Sync"
+    commit id: "Finalize Gold Layer"
+    
+    checkout main
+    merge feature/gold-analytics tag: "v1.1.0-RC"

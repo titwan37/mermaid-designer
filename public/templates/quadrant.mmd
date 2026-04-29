@@ -1,0 +1,31 @@
+---
+config:
+  theme: neutral
+  look: handDrawn
+  themeVariables:
+    fontFamily: "'Source Code Pro', monospace"
+    titleFontSize: "20px"
+    # Modern professional colors
+    quadrant1Fill: "#f0fdf4"  # Green tint
+    quadrant2Fill: "#eff6ff"  # Blue tint
+    quadrant3Fill: "#fef2f2"  # Red tint
+    quadrant4Fill: "#fffbeb"  # Yellow tint
+    quadrantInternalBorderStrokeFill: "#cbd5e1"
+---
+quadrantChart
+    title 🚀 Strategic AI Roadmap (Efficiency vs Impact)
+    x-axis "⏳ Slow execution" --> "⚡ Rapid Deployment"
+    y-axis "📉 Low Business Value" --> "📈 High Strategic Impact"
+    
+    %% Quadrant labels give the chart meaning
+    quadrant-1 "Big Wins (Prioritize)"
+    quadrant-2 "Low Hanging Fruit"
+    quadrant-3 "Money Pit (Avoid)"
+    quadrant-4 "Long-term Bets"
+
+    %% Points with specific coordinates [x, y]
+    "Bronze Layer Ingestion": [0.8, 0.2]
+    "Silver Vault Mapping": [0.7, 0.7]
+    "Gold Feature Store": [0.4, 0.9]
+    "RAG / LLM Integration": [0.2, 0.95]
+    "Manual Data Entry": [0.1, 0.1]

@@ -1,0 +1,43 @@
+---
+config:
+  theme: neutral
+  themeVariables:
+    fontFamily: "'Source Code Pro', monospace"
+    fontSize: "12px"
+    wardleyBackground: "transparent"
+    wardleyPrimaryColor: "#07aa2d"
+    wardleyDiffColor: "#9486fd"
+---
+wardley-beta
+    title 🚀 AI Strategy: Medallion Evolution
+    
+    %% 1. Evolution Axis (Genesis to Commodity)
+    evolution Genesis -> "Custom-Built" -> Product -> Commodity
+    
+    %% 2. Anchors (Users at the top)
+    anchor "End User" [0.95, 0.45]
+    anchor "Data Scientist" [0.95, 0.55]
+    
+    %% 3. Components [Visibility, Evolution]
+    component "AI Dashboard" [0.85, 0.35] (build)
+    component "Feature Store" [0.75, 0.45] (build)
+    
+    %% 4. Pipelines (Grouping the Medallion Layers)
+    component "Bronze (Raw)" [0.50, 0.20]
+    component "Silver (Clean)" [0.50, 0.55]
+    component "Gold (Semantic)" [0.50, 0.80] (market)
+    
+    component "Cloud Infrastructure" [0.15, 0.95] (outsource)
+    
+    %% 5. Strategic Flows
+    "End User"->"AI Dashboard"
+    "Data Scientist"->"Feature Store"
+    "AI Dashboard"->"Gold (Semantic)"
+    "Feature Store"->"Gold (Semantic)"
+    "Gold (Semantic)"->"Silver (Clean)"
+    "Silver (Clean)"->"Bronze (Raw)"
+    "Bronze (Raw)"->"Cloud Infrastructure"
+    
+    %% 7. Annotations
+    note "Bronze ensures Data Sovereignty" [0.10, 0.20]
+    note "Gold layer is the Profit Center" [0.70, 0.85] 

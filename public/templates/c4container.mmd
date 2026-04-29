@@ -1,0 +1,58 @@
+---
+config:
+  theme: neutral
+  look: handDrawn
+---
+C4Container
+    title [Container] AI-Powered Medallion Data Platform
+
+    Person(data_scientist, "Data Scientist", "Builds ML models.")
+    Person(clinician, "Clinician", "Views clinical insights.")
+
+    System_Boundary(platform, "Data & AI Platform") {
+        Container(ingest_service, "Ingestion Service", "Python", "Raw ingestion.")
+        
+        %% BRONZE
+        ContainerDb(bronze_db, "Bronze Storage", "S3", "Immutable WORM data.")
+        
+        Container(spark_job, "Processing Engine", "Spark", "QA Gates.")
+        
+        %% SILVER
+        ContainerDb(silver_db, "Silver Vault", "Databricks", "Cleaned models.")
+
+        %% GOLD/AI
+        Container(vector_db, "Vector Store", "Pinecone", "RAG Context.")
+        Container(api, "AI Serving API", "Next.js", "ML Predictions.")
+    }
+
+    System_Ext(ehr, "External EHR System", "Legacy Source.")
+
+    Rel(ehr, ingest_service, "HL7/mTLS")
+    Rel(ingest_service, bronze_db, "S3 API")
+    Rel(bronze_db, spark_job, "Validate")
+    Rel(spark_job, silver_db, "Persist")
+    Rel(silver_db, vector_db, "Feature Sync")
+    Rel(vector_db, api, "Query")
+    
+    Rel(data_scientist, silver_db, "SQL", "JDBC")
+    Rel(clinician, api, "Insights", "HTTPS")
+
+    %% --- CUSTOM STYLING MACROS ---
+    
+    %% Style for Persons (Dark Blue)
+    UpdateElementStyle(person, $bgColor="#083344", $fontColor="#ffffff", $borderColor="#0e7490")
+    
+    %% Style for External Systems (Grey)
+    UpdateElementStyle(external_system, $bgColor="#f1f5f9", $fontColor="#475569", $borderColor="#94a3b8")
+    
+    %% Specific Container Styles based on Medallion Layers
+    UpdateElementStyle(ingest_service, $bgColor="#fff7ed", $fontColor="#9a3412", $borderColor="#ea580c")
+    UpdateElementStyle(bronze_db, $bgColor="#f5f3ff", $fontColor="#5b21b6", $borderColor="#7c3aed")
+    UpdateElementStyle(silver_db, $bgColor="#f0fdfa", $fontColor="#0f766e", $borderColor="#0d9488")
+    UpdateElementStyle(vector_db, $bgColor="#eff6ff", $fontColor="#1e40af", $borderColor="#2563eb")
+    UpdateElementStyle(api, $bgColor="#eff6ff", $fontColor="#1e40af", $borderColor="#2563eb")
+
+    %% Relationship Styling (Make the primary data flow thick and blue)
+    UpdateRelStyle($lineColor="#334155", $textColor="#334155")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")

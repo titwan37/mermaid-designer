@@ -1,0 +1,405 @@
+[
+  {
+    "id": "c4container",
+    "title": "Data Platform C4 Container",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/c4container.mmd",
+    "thumbnailStatic": "/thumbnails/c4container.svg",
+    "description": "C4 Container model of a modern AI-Powered Medallion Data Platform.",
+    "useCases": [
+      "System Architecture",
+      "Data Engineering"
+    ]
+  },
+  {
+    "id": "flowchart-advanced",
+    "title": "ML Pipeline Flowchart",
+    "category": "Flowchart",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/flowchart_advanced.mmd",
+    "thumbnailStatic": "/thumbnails/flowchart_advanced.svg",
+    "description": "Advanced flowchart visualizing Medallion architecture and ML serving pipelines.",
+    "useCases": [
+      "MLOps",
+      "Data Pipelines"
+    ]
+  },
+  {
+    "id": "architecture",
+    "title": "Cloud AI Architecture",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/architecture.mmd",
+    "thumbnailStatic": "/thumbnails/architecture.svg",
+    "description": "High-level cloud architecture for AI service deployment.",
+    "useCases": [
+      "Cloud Deployment",
+      "Infrastructure"
+    ]
+  },
+  {
+    "id": "block",
+    "title": "System Block Diagram",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/block.mmd",
+    "thumbnailStatic": "/thumbnails/block.svg",
+    "description": "Block diagram showing core processing layers and data ingestion.",
+    "useCases": [
+      "System Design",
+      "Component Overview"
+    ]
+  },
+  {
+    "id": "sankey",
+    "title": "Data Flow Sankey",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/sankey.mmd",
+    "thumbnailStatic": "/thumbnails/sankey.svg",
+    "description": "Visualize data lineage, token usage, or resource allocation flows.",
+    "useCases": [
+      "Data Lineage",
+      "Resource Tracking"
+    ]
+  },
+  {
+    "id": "er",
+    "title": "Entity Relationship",
+    "category": "Database",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/er.mmd",
+    "thumbnailStatic": "/thumbnails/er.svg",
+    "description": "Data modeling for relational databases and feature stores.",
+    "useCases": [
+      "Data Modeling",
+      "Database Design"
+    ]
+  },
+  {
+    "id": "data-engineer-journey",
+    "title": "Data Engineer Workflow",
+    "category": "Journey",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/data_engineer_journey.mmd",
+    "thumbnailStatic": "/thumbnails/data_engineer_journey.svg",
+    "description": "User journey mapping the daily workflow of a Data Engineer.",
+    "useCases": [
+      "UX/DX",
+      "Workflow Analysis"
+    ]
+  },
+  {
+    "id": "mindmap",
+    "title": "AI Feature Mindmap",
+    "category": "Ideation",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/mindmap.mmd",
+    "thumbnailStatic": "/thumbnails/mindmap.svg",
+    "description": "Hierarchical brainstorming tool for AI capabilities and model features.",
+    "useCases": [
+      "Brainstorming",
+      "Feature Planning"
+    ]
+  },
+  {
+    "id": "wardley",
+    "title": "AI Strategy Wardley Map",
+    "category": "Strategy",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/wardley.mmd",
+    "thumbnailStatic": "/thumbnails/wardley.svg",
+    "description": "Strategic mapping of AI components from genesis to commodity.",
+    "useCases": [
+      "Tech Strategy",
+      "Market Analysis"
+    ]
+  },
+  {
+    "id": "git",
+    "title": "GitOps Branching",
+    "category": "DevOps",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/git.mmd",
+    "thumbnailStatic": "/thumbnails/git.svg",
+    "description": "Version control branching strategies for CI/CD and MLOps.",
+    "useCases": [
+      "GitOps",
+      "Version Control"
+    ]
+  },
+  {
+    "id": "timeline-advanced",
+    "title": "Platform Roadmap",
+    "category": "Planning",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/timeline-advanced.mmd",
+    "thumbnailStatic": "/thumbnails/timeline-advanced.svg",
+    "description": "Advanced timeline charting the evolution of a data platform.",
+    "useCases": [
+      "Roadmapping",
+      "Strategic Planning"
+    ]
+  },
+  {
+    "id": "quadrant",
+    "title": "Model Evaluation Quadrant",
+    "category": "Analysis",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/quadrant.mmd",
+    "thumbnailStatic": "/thumbnails/quadrant.svg",
+    "description": "Prioritize AI models by comparing effort versus impact.",
+    "useCases": [
+      "Prioritization",
+      "Model Selection"
+    ]
+  },
+  {
+    "id": "sequence",
+    "title": "API Sequence Diagram",
+    "category": "Integration",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/sequence.mmd",
+    "thumbnailStatic": "/thumbnails/sequence.svg",
+    "description": "Detailed interaction flow between microservices and LLM endpoints.",
+    "useCases": [
+      "API Design",
+      "Microservices"
+    ]
+  },
+  {
+    "id": "state",
+    "title": "Model State Machine",
+    "category": "Logic",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/state.mmd",
+    "thumbnailStatic": "/thumbnails/state.svg",
+    "description": "State transitions for training, evaluation, and serving pipelines.",
+    "useCases": [
+      "State Management",
+      "Pipeline Logic"
+    ]
+  },
+  {
+    "id": "radar",
+    "title": "Performance Radar",
+    "category": "Data Vis",
+    "thumbnailSvg": "chart",
+    "thumbnailStatic": "/thumbnails/radar.svg",
+    "path": "/templates/radar.mmd",
+    "description": "Multi-dimensional performance comparison for model benchmarking.",
+    "useCases": [
+      "Benchmarking",
+      "Metrics"
+    ]
+  },
+  {
+    "id": "c4",
+    "title": "C4 Context",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/c4.mmd",
+    "thumbnailStatic": "/thumbnails/c4.svg",
+    "description": "High-level C4 context diagram for system interactions.",
+    "useCases": [
+      "System Context",
+      "Stakeholder Alignment"
+    ]
+  },
+  {
+    "id": "class",
+    "title": "Class Diagram",
+    "category": "Development",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/class.mmd",
+    "thumbnailStatic": "/thumbnails/class.svg",
+    "description": "Object-oriented class structures for software engineering.",
+    "useCases": [
+      "OOP Design",
+      "Code Structure"
+    ]
+  },
+  {
+    "id": "packet",
+    "title": "Network Packet",
+    "category": "Infrastructure",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/packet.mmd",
+    "thumbnailStatic": "/thumbnails/packet.svg",
+    "description": "Visualize network protocols, bit fields, and custom packet structures.",
+    "useCases": [
+      "Networking",
+      "Protocol Design"
+    ]
+  },
+  {
+    "id": "requirement",
+    "title": "System Requirements",
+    "category": "Engineering",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/requirement.mmd",
+    "thumbnailStatic": "/thumbnails/requirement.svg",
+    "description": "Formal requirement mapping and traceability for complex systems.",
+    "useCases": [
+      "Systems Engineering",
+      "Compliance"
+    ]
+  },
+  {
+    "id": "kanban",
+    "title": "Agile Kanban Board",
+    "category": "Agile",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/kanban.mmd",
+    "thumbnailStatic": "/thumbnails/kanban.svg",
+    "description": "Visual task management and agile sprint tracking.",
+    "useCases": [
+      "Project Management",
+      "Agile"
+    ]
+  },
+  {
+    "id": "gantt",
+    "title": "Project Gantt Chart",
+    "category": "Planning",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/gantt.mmd",
+    "thumbnailStatic": "/thumbnails/gantt.svg",
+    "description": "Project scheduling, dependencies, and critical path analysis.",
+    "useCases": [
+      "Scheduling",
+      "Project Management"
+    ]
+  },
+  {
+    "id": "xychart",
+    "title": "Statistical XY Chart",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/xychart.mmd",
+    "thumbnailStatic": "/thumbnails/xychart.svg",
+    "description": "Bar and line charts for statistical data visualization.",
+    "useCases": [
+      "Data Visualization",
+      "Reporting"
+    ]
+  },
+  {
+    "id": "pie",
+    "title": "Distribution Pie Chart",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/pie.mmd",
+    "thumbnailStatic": "/thumbnails/pie.svg",
+    "description": "Simple proportional distribution visualization.",
+    "useCases": [
+      "Analytics",
+      "Reporting"
+    ]
+  },
+  {
+    "id": "ishikawa",
+    "title": "Ishikawa (Fishbone)",
+    "category": "Analysis",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/ishikawa.mmd",
+    "thumbnailStatic": "/thumbnails/ishikawa.svg",
+    "description": "Root cause analysis diagram for troubleshooting systemic issues.",
+    "useCases": [
+      "Troubleshooting",
+      "Quality Control"
+    ]
+  },
+  {
+    "id": "ishikawa-beta",
+    "title": "Ishikawa Beta",
+    "category": "Analysis",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/ishikawa_beta.mmd",
+    "thumbnailStatic": "/thumbnails/ishikawa_beta.svg",
+    "description": "Alternative rendering for Fishbone root-cause diagrams.",
+    "useCases": [
+      "Troubleshooting",
+      "Analysis"
+    ]
+  },
+  {
+    "id": "timeline",
+    "title": "Basic Timeline",
+    "category": "Planning",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/timeline.mmd",
+    "thumbnailStatic": "/thumbnails/timeline.svg",
+    "description": "Simple sequential timeline for historical events or simple plans.",
+    "useCases": [
+      "History",
+      "Simple Planning"
+    ]
+  },
+  {
+    "id": "treemap",
+    "title": "Hierarchical Treemap",
+    "category": "Data Vis",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/treemap.mmd",
+    "thumbnailStatic": "/thumbnails/treemap.svg",
+    "description": "Visualize hierarchical data as a set of nested rectangles.",
+    "useCases": [
+      "Data Visualization",
+      "Hierarchy"
+    ]
+  },
+  {
+    "id": "treeview",
+    "title": "Directory Treeview",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/treeview.mmd",
+    "thumbnailStatic": "/thumbnails/treeview.svg",
+    "description": "Represent file systems, organizational charts, or nested structures.",
+    "useCases": [
+      "File Structure",
+      "Org Charts"
+    ]
+  },
+  {
+    "id": "user-journey",
+    "title": "User Journey Map",
+    "category": "Journey",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/user_journey.mmd",
+    "thumbnailStatic": "/thumbnails/user_journey.svg",
+    "description": "Track user sentiment and actions across a product experience.",
+    "useCases": [
+      "UX Research",
+      "Product Management"
+    ]
+  },
+  {
+    "id": "venn",
+    "title": "Venn Diagram",
+    "category": "Analysis",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/venn.mmd",
+    "thumbnailStatic": "/thumbnails/venn.svg",
+    "description": "Logical sets and their intersections.",
+    "useCases": [
+      "Set Theory",
+      "Comparisons"
+    ]
+  },
+  {
+    "id": "zenuml",
+    "title": "ZenUML Sequence",
+    "category": "Integration",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/zenuml.mmd",
+    "thumbnailStatic": "/thumbnails/zenuml.svg",
+    "description": "Fast and clean sequence diagrams using the ZenUML syntax.",
+    "useCases": [
+      "API Design",
+      "Rapid Prototyping"
+    ]
+  }
+]

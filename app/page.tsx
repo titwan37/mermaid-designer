@@ -24,10 +24,13 @@ function HomeContent() {
     }
   }, [selected, currentId]);
 
+  const BASE_PATH = "/mermaid-designer";
+  const fixPath = (p: string) => p.startsWith("http") ? p : `${BASE_PATH}${p}`;
+
   React.useEffect(() => {
     if (selected && !preloadedCode && !loading) {
       setLoading(true);
-      fetch(selected.path)
+      fetch(fixPath(selected.path))
         .then((res) => res.text())
         .then((text) => {
           setPreloadedCode(text);

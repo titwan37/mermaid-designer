@@ -99,8 +99,8 @@ export default function EditorPage({ initialMMD }: { initialMMD?: string }) {
       {/* ── Action bar ── */}
       <header className="flex items-center justify-between p-2 bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur shadow-sm border-b border-zinc-200 dark:border-zinc-800">
         <div className="flex items-center space-x-2">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="px-3 py-1 text-sm font-medium bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors flex items-center"
           >
             ← Gallery

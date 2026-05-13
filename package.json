@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "thumbnails": "node scripts/generate-thumbnails.mjs"
   },
   "dependencies": {
     "@mermaid-js/mermaid-zenuml": "^0.2.2",
@@ -20,6 +21,7 @@
     "next": "^16.2.4",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-resizable-panels": "^4.11.0",
     "react-zoom-pan-pinch": "^4.0.3"
   },
   "devDependencies": {

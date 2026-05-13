@@ -37,26 +37,40 @@ export default function ActionBar({ code, onLoad }: Props) {
   };
 
   const downloadSVG = () => {
-    const svgEl = document.querySelector("#mermaid-svg");
-    if (!svgEl) return;
+    const svgEl = document.querySelector(".mermaid-container svg");
+    if (!svgEl) {
+      console.warn("SVG element not found inside .mermaid-container");
+      return;
+    }
     const serializer = new XMLSerializer();
-    const svgString = serializer.serializeToString(svgEl as Element);
+    const svgString = serializer.serializeToString(svgEl);
     downloadBlob(new Blob([svgString], { type: "image/svg+xml" }), "diagram.svg");
   };
 
   const downloadPNG = async () => {
-    const svgEl = document.querySelector("#mermaid-svg") as HTMLElement;
-    if (!svgEl) return;
-    const container = document.createElement("div");
-    container.style.position = "fixed";
-    container.style.top = "-9999px";
-    container.appendChild(svgEl.cloneNode(true));
-    document.body.appendChild(container);
-    const canvas = await html2canvas(container, { backgroundColor: null });
-    const dataUrl = canvas.toDataURL("image/png");
-    const blob = await (await fetch(dataUrl)).blob();
-    downloadBlob(blob, "diagram.png");
-    document.body.removeChild(container);
+    // Target the container instead of the SVG directly to avoid html2canvas cloning bugs
+    const container = document.querySelector(".mermaid-container") as HTMLElement;
+    if (!container) {
+      console.warn("Mermaid container not found");
+      return;
+    }
+
+    try {
+      const canvas = await html2canvas(container, {
+        backgroundColor: "white",
+        scale: 1, 
+        logging: false,
+        useCORS: true,
+      });
+
+      const dataUrl = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
+      downloadLink.href = dataUrl;
+      downloadLink.download = "diagram.png";
+      downloadLink.click();
+    } catch (err) {
+      console.error("Failed to export PNG:", err);
+    }
   };
 
   const copyToClipboard = async () => {

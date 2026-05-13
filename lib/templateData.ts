@@ -11,6 +11,8 @@ export interface MermaidTemplate {
   category: string;
   /** Key for the built-in IconMapper */
   thumbnailSvg: string;
+  /** Path to static thumbnail */
+  thumbnailStatic: string;
   /** Absolute path to the source .mmd file */
   path: string;
   /** Short description displayed in the gallery */

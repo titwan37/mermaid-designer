@@ -22,14 +22,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   React.useEffect(() => {
     const init = async () => {
       setMounted(true);
-      await initMermaid(); // Initialize mermaid settings and register ZenUML
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setDark(prefersDark);
+      await initMermaid();
+
+      // Mirroring simulacrum-client theme logic
+      const storedTheme = localStorage.getItem('mermaid-designer-theme');
+      if (storedTheme) {
+        setDark(storedTheme === 'dark');
+      } else {
+        const hour = new Date().getHours();
+        // Auto-dark from 6 PM (18:00) to 8 AM (08:00)
+        const isNight = hour < 8 || hour >= 18;
+        if (isNight) {
+          setDark(true);
+        } else {
+          // Default to system preference if it's daytime
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          setDark(prefersDark);
+        }
+      }
     };
     init();
   }, []);
 
-  const toggle = () => setDark((prev: boolean) => !prev);
+  const toggle = () => {
+    setDark((prev: boolean) => {
+      const newVal = !prev;
+      localStorage.setItem('mermaid-designer-theme', newVal ? 'dark' : 'light');
+      return newVal;
+    });
+  };
 
   React.useEffect(() => {
     if (dark) document.documentElement.classList.add("dark");

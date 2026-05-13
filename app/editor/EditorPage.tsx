@@ -45,6 +45,24 @@ export default function EditorPage({ initialMMD }: { initialMMD?: string }) {
     }
   };
 
+  const Clock = () => {
+    const [time, setTime] = React.useState(new Date());
+    React.useEffect(() => {
+      const timer = setInterval(() => setTime(new Date()), 1000);
+      return () => clearInterval(timer);
+    }, []);
+    return (
+      <>
+        {time.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        })}
+      </>
+    );
+  };
+
   const loadText = (text: string) => {
     setEditorValue(text);
     setCode(text);
@@ -97,6 +115,13 @@ export default function EditorPage({ initialMMD }: { initialMMD?: string }) {
             {!mounted ? "..." : dark ? "☀️ Light" : "🌙 Dark"}
           </button>
           <TemplateSelect onSelect={loadText} />
+        </div>
+
+        <div className="px-3 py-1 bg-white dark:bg-zinc-700/50 rounded-md shadow-sm border border-zinc-200 dark:border-zinc-800 flex items-center space-x-2">
+          <span className="text-emerald-500 animate-pulse">●</span>
+          <p className="text-sm font-mono text-zinc-600 dark:text-zinc-300">
+            <Clock />
+          </p>
         </div>
         <ActionBar code={code} onLoad={loadText} />
       </header>

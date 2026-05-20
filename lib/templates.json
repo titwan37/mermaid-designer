@@ -401,5 +401,19 @@
       "Troubleshooting",
       "Analysis"
     ]
+  },
+  {
+    "id": "evtmodeling",
+    "title": "Event Modeling",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/evtmodeling.mmd",
+    "thumbnailStatic": "/thumbnails/evtmodeling.svg",
+    "description": "Organize system UI, Command, and Event flows over sequential timeframes.",
+    "useCases": [
+      "Event Storming",
+      "Architecture",
+      "System Design"
+    ]
   }
 ]

@@ -49,6 +49,7 @@ export default function TemplateSelect({ onSelect }: Props) {
       { name: "🗺️ Wardley Map", path: "/mermaid-designer/templates/wardley.mmd" },
       { name: "📈 XY Chart", path: "/mermaid-designer/templates/xychart.mmd" },
       { name: "📜 ZenUML", path: "/mermaid-designer/templates/zenuml.mmd" },
+      { name: "⚡ Event Modeling", path: "/mermaid-designer/templates/evtmodeling.mmd" },
     ]);
   }, []);
 

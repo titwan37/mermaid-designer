@@ -3,5 +3,43 @@ config:
   theme: neutral
 ---
 erDiagram
+    CUSTOMER }|..|{ DELIVERY-ADDRESS : has
     CUSTOMER ||--o{ ORDER : places
-    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER ||--o{ INVOICE : "liable for"
+    DELIVERY-ADDRESS ||--o{ ORDER : receives
+    INVOICE ||--|{ ORDER : covers
+    ORDER ||--|{ ORDER-ITEM : includes
+    PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+    PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+    ORDER ||--|{ WATCH-ITEM : contains
+    CUSTOMER {
+        string id
+        string name
+        string email
+    }
+    ORDER {
+        string id
+        date orderDate
+        string status
+    }
+    PRODUCT {
+        string id
+        string name
+        float price
+    }
+    ORDER-ITEM {
+        int quantity
+        float price
+    }
+    INVOICE {
+        string id
+        date invoiceDate
+        string customerId
+        float price
+    }
+    DELIVERY-ADDRESS{
+        string streetName
+        float postCode
+        string city
+        string country
+    }

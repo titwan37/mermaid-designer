@@ -196,6 +196,16 @@ export default function TemplateGallery() {
           </div>
         ))}
       </div>
+
+      {/* Site Footer */}
+      <footer className="mt-16 pt-8 pb-6 border-t border-zinc-200 dark:border-zinc-800/80 bg-gradient-to-t from-zinc-50/50 to-transparent dark:from-zinc-950/20 text-zinc-500 dark:text-zinc-400">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-xs gap-3">
+          <p>© 2026 Antoine Falempin | AFA Studio. All rights reserved.</p>
+          <p className="font-mono text-[10px] tracking-wider text-zinc-400 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-800/50 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-800">
+            🔒 SECURE GATEWAY | MERMAID DESIGNER TELEMETRY ENFORCED
+          </p>
+        </div>
+      </footer>
     </section>
   );
 }

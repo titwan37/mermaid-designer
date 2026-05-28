@@ -1,0 +1,69 @@
+---
+config:
+  theme: neutral
+  layout: elk
+  css: |
+    /* Brainstorming Swimlane Colors via ID Prefixes */
+    .node[id^="ui_"] { fill: #d4edda; stroke: #28a745; stroke-width: 2px; }                                 /* Green: Client Views */
+    .node[id^="rmo_"], .node[id^="db_"] { fill: #e8f5e9; stroke: #2e7d32; stroke-width: 2px; }              /* Light Green: Projections & Datastores */
+    .node[id^="cmd_"] { fill: #cce5ff; stroke: #007bff; stroke-width: 2px; }                                /* Blue: Commands */
+    .node[id^="evt_"] { fill: #ffe8cc; stroke: #fd7e14; stroke-width: 2px; }                                /* Orange: Immutable Events */
+    .node[id^="api_"] { fill: #f8d7da; stroke: #dc3545; stroke-width: 2px; }                                /* Pink: External Interfaces */
+---
+eventmodeling
+
+  // --- STAGE 1: SHOPPING CART ---
+  tf 01 ui_CartUI {🛒 Cart Workspace }
+  tf 01 rmo_ProductCatalog {🗄️ DB: Product Catalog }
+  tf 02 cmd_AddItemToCart {⚡ Cmd: AddItemToCart }
+  tf 03 evt_ItemAddedToCart {🎉 Evt: ItemAddedToCart }
+  tf 04 rmo_CartSummaryView {📋 Proj: Active Cart View }
+  tf 04 rmo_Cart {🗄️ DB: Cart Session }
+  tf 04 rmo_CartItem {🗄️ DB: Cart Items }
+
+  // --- STAGE 2: INVENTORY VERIFICATION ---
+  tf 09 api_InventoryService {🤖 API: Inventory Boundary }
+  tf 12 db_InventoryDB {🗄️ DB: Core Stock Inventory }
+  tf 12 db_InventoryReservation {🗄️ DB: Held Allocations }
+  tf 29 ui_CheckoutUI {💻 Checkout Confirm View }
+
+  // --- STAGE 3: ORDER SUBMISSION ---
+  tf 30 cmd_SubmitOrder {⚡ Cmd: SubmitOrder }
+  tf 30 cmd_SubmitOrderToApi {⚡ Cmd: SubmitOrderToApi }
+  tf 31 evt_OrderPlaced {🎉 Evt: OrderPlaced }
+  tf 31 evt_OrderSubmitted {🎉 Evt: OrderSubmitted }
+  tf 32 evt_OrderRejected {🎉 Evt: OrderRejected }
+  tf 34 evt_InventoryReserved {🎉 Evt: InventoryReserved }
+  tf 34 evt_InventoryAllocationFailed {🎉 Evt: InventoryAllocationFailed }
+
+  // --- STAGE 4: PAYMENT ---
+  tf 35 api_PaymentService {🤖 API: Stripe Payment Gateway }
+  tf 40 cmd_ProcessPayment {⚡ Cmd: ProcessPayment }
+  tf 40 cmd_ProcessPaymentToApi {⚡ Cmd: ProcessPaymentToApi }
+  tf 41 evt_PaymentProcessed {🎉 Evt: PaymentProcessed }
+  tf 41 evt_PaymentFailed {🎉 Evt: PaymentFailed }
+  tf 41 db_Payment {🗄️ DB: Ledger Transactions }
+  tf 43 evt_OrderApproved {🎉 Evt: OrderApproved }
+  tf 43 evt_OrderDenied {🎉 Evt: OrderDenied }
+
+  // --- STAGE 5: LOGISTICS & FULFILLMENT ---
+  tf 44 api_ShippingService {🤖 API: Shipping Dispatcher }
+  tf 44 cmd_ShipOrder {⚡ Cmd: ShipOrder }
+  tf 44 cmd_ShipOrderToApi {⚡ Cmd: ShipOrderToApi }
+  tf 45 evt_OrderShipped {🎉 Evt: OrderShipped }
+  tf 45 evt_ShippingFailed {🎉 Evt: ShippingFailed }
+  tf 46 db_Order {🗄️ DB: Orders Header }
+  tf 46 db_OrderItem {🗄️ DB: Order Line Items }
+  tf 46 db_ShippingInfo {🗄️ DB: Logistics Address }
+
+  // --- STAGE 6: FINISHED OUTCOMES ---
+  tf 47 ui_ConfirmationUI {💻 Success Confirmation Screen }
+  tf 48 evt_OrderComplete {🎉 Evt: OrderComplete }
+  tf 48 evt_OrderCancelled {🎉 Evt: OrderCancelled }
+  tf 50 ui_ErrorUI {💻 Error Intercept Screen }
+  tf 50 evt_SystemError {🎉 Evt: SystemError }
+
+  // --- STAGE 7: METRICS & TELEMETRY ---
+  tf 60 db_InventorySnapshot {🗄️ DB: Operational Stock Snapshot }
+  tf 61 db_OrderLog {🗄️ DB: System History Audits }
+  tf 62 db_Metrics {🗄️ DB: System Performance Telemetry }

@@ -1,0 +1,52 @@
+---
+config:
+  theme: base
+  themeVariables:
+    actorBkg: "#EAFBFA"
+    actorBorder: "#00C2A0"
+    actorTextColor: "#333333"
+    signalColor: "#1890FF"
+    signalTextColor: "#333333"
+    labelBoxBkgColor: "#FFF4E8"
+    labelBoxBorderColor: "#FF9933"
+---
+sequenceDiagram
+    autonumber
+    
+    %% Participant Definitions
+    actor User as User
+    participant CI as Chat Interface
+    participant SG as Safety & Guardrails
+    participant API as Backend API (FastAPI)
+    participant Redis as Session DB (Redis)
+    participant Pinecone as Vector DB (Pinecone)
+    participant LLM as LLM (Gemini / GPT-4)
+
+    %% Message Flow
+    User->>CI: Send Message / Prompt
+    CI->>SG: Validate Input & Filtering
+    
+    alt Is Content Unsafe?
+        SG->>CI: Alert: Inappropriate Content
+        CI-->>User: Message Rejected
+    else Is Content Safe?
+        SG->>API: Forward Sanitized Prompt
+    end
+
+    critical Processing Request
+        API->>Redis: Fetch Conversation History (Memory)
+        Redis-->>API: Return Last 5 Messages
+        API->>Pinecone: Query Embedding (RAG)
+        Pinecone-->>API: Return Relevant Docs / Context
+        API->>LLM: Send (History + Context + Prompt)
+        
+        alt Success
+            LLM-->>API: Generate Response & Token Usage
+            API->>Redis: Save New Response to Memory
+            API->>CI: Send Streaming / Full Response
+            CI-->>User: Display AI Response
+        else LLM Timeout / Error
+            API->>CI: Send Error Message (Fallback)
+            CI-->>User: "Sorry, the system is currently busy."
+        end
+    end

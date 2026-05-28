@@ -65,6 +65,20 @@
     ]
   },
   {
+    "id": "evtmodeling",
+    "title": "Event Modeling",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/evtmodeling.mmd",
+    "thumbnailStatic": "/thumbnails/evtmodeling.svg",
+    "description": "Organize system UI, Command, and Event flows over sequential timeframes.",
+    "useCases": [
+      "Event Storming",
+      "Architecture",
+      "System Design"
+    ]
+  },
+  {
     "id": "pie",
     "title": "Distribution Pie Chart",
     "category": "Data Vis",
@@ -234,6 +248,20 @@
     ]
   },
   {
+    "id": "evtmodeling2",
+    "title": "Shopping Cart Event Model",
+    "category": "Architecture",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/evtmodeling2.mmd",
+    "thumbnailStatic": "/thumbnails/evtmodeling2.svg",
+    "description": "Shopping cart event storming diagram with detailed swimlane styling.",
+    "useCases": [
+      "Event Storming",
+      "E-commerce",
+      "Architecture"
+    ]
+  },
+  {
     "id": "c4",
     "title": "C4 Context",
     "category": "Architecture",
@@ -296,6 +324,19 @@
     "useCases": [
       "API Design",
       "Microservices"
+    ]
+  },
+  {
+    "id": "sequence-advanced",
+    "title": "Advanced RAG Sequence",
+    "category": "Integration",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/sequence-advanced.mmd",
+    "thumbnailStatic": "/thumbnails/sequence-advanced.svg",
+    "description": "Complex interaction flow demonstrating LLM pipelines with RAG and databases.",
+    "useCases": [
+      "AI Engineering",
+      "System Architecture"
     ]
   },
   {
@@ -400,20 +441,6 @@
     "useCases": [
       "Troubleshooting",
       "Analysis"
-    ]
-  },
-  {
-    "id": "evtmodeling",
-    "title": "Event Modeling",
-    "category": "Architecture",
-    "thumbnailSvg": "dynamic",
-    "path": "/templates/evtmodeling.mmd",
-    "thumbnailStatic": "/thumbnails/evtmodeling.svg",
-    "description": "Organize system UI, Command, and Event flows over sequential timeframes.",
-    "useCases": [
-      "Event Storming",
-      "Architecture",
-      "System Design"
     ]
   }
 ]

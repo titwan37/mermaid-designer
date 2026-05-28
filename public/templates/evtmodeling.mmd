@@ -3,8 +3,21 @@ config:
   theme: neutral
   layout: elk
 ---
-
 eventmodeling
-  tf 01 ui CartUI
-  tf 02 cmd AddItem { "description": "string" }
-  tf 03 evt ItemAdded { "description": "string" }
+  // --- PHASE 1: INITIAL STATE & AGENT TRIGGER ---
+  tf 01 rmo PendingQuestions {📋 Ops Dashboard: Pending Questions }
+  tf 02 pcr AgentA {🤖 AI Triager (Agent A) }
+
+  // --- PHASE 2: PROCESSING THE INTENT ---
+  tf 03 cmd InvokeModel {⚡ Action: Analyze Question & Plan }
+  tf 04 evt InvocationCompleted {🎉 Fact: Query Parsed }
+  tf 05 rmo InvocationResult {🎯 Thought Loop: Action Plan } 
+
+  // --- PHASE 3: THE DATA DIGGING ---
+  tf 06 pcr AgentA {🤖 AI Triager: Running SQL/API Fetch }
+  tf 07 cmd InvokeModelWithTool {⚡ Action: Back to LLM }
+
+  // --- PHASE 4: THE REVEAL & HANDOFF ---
+  tf 08 evt InvocationCompletedFinal {🎉 Fact: Human-Readable Summary }
+  tf 09 rmo FinalInvocationResult {✅ Audit Log: Query Satisfied }
+  tf 10 pcr AgentB {🧑‍💼 Billing Clerk (Agent B): Reviewing flagged }

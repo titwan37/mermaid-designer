@@ -1,0 +1,28 @@
+---
+config:
+  theme: neutral
+  layout: elk
+  css: |
+    /* Brainstorming Swimlane Colors */
+    .node[id*="ui"], .node[id*="rm"], .node[id*="rmo"] { fill: #d4edda; stroke: #28a745; stroke-width: 2px; } /* Green: Views */
+    .node[id*="cmd"] { fill: #cce5ff; stroke: #007bff; stroke-width: 2px; }                                /* Blue: Commands */
+    .node[id*="evt"] { fill: #ffe8cc; stroke: #fd7e14; stroke-width: 2px; }                                /* Orange: Events */
+    .node[id*="pcr"] { fill: #f8d7da; stroke: #dc3545; stroke-width: 2px; }                                /* Pink: Processors */
+---
+eventmodeling
+  tf 01 ui CartUI {🛒 Cart UI }
+  tf 02 cmd CreateCart {⚡ Cmd: CreateCart }
+  tf 03 evt CartCreated {🎉 Evt: CartCreated }
+  tf 04 cmd AddItem {⚡ Cmd: AddItem }
+  tf 05 evt ItemAdded {🎉 Evt: ItemAdded }
+//  tf 06 cmd RemoveItem {⚡ Cmd: RemoveItem }
+//  tf 07 evt ItemRemoved {🎉 Evt: ItemRemoved }
+  tf 08 rmo CartItems {📋 Read Model: Cart Items }
+  tf 09 ui CartUI_Updated {🛒 Updated Cart UI View }
+  tf 10 evt ExternalInventoryChanged {🎉 Evt: External.InventoryChanged }
+  tf 11 pcr InventoryProcessor {🤖 Processor: Inventory Automation }
+  tf 12 cmd ChangeInventory {⚡ Cmd: ChangeInventory }
+  tf 13 evt CartInventoryChanged {🎉 Evt: Cart.InventoryChanged }
+  tf 14 cmd AdjustStock {⚡ Cmd: AdjustStock }
+  tf 15 evt StockAdjusted {🎉 Evt: StockAdjusted }
+  tf 16 ui StockProjection {📊 Stock Projection View }

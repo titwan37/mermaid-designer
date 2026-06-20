@@ -340,6 +340,34 @@
     ]
   },
   {
+    "id": "sequence-diag",
+    "title": "MLOps Lifecycle Sequence",
+    "category": "Integration",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/sequence-diag.mmd",
+    "thumbnailStatic": "/thumbnails/sequence.svg",
+    "description": "Detailed MLOps lifecycle tracking offline datasets, evaluation loop, deployment, and online observability feedback.",
+    "useCases": [
+      "MLOps",
+      "Workflow Integration",
+      "System Architecture"
+    ]
+  },
+  {
+    "id": "sequence-diagV2",
+    "title": "Autonomous Edge & AI Engine Sequence",
+    "category": "Integration",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/sequence-diagV2.mmd",
+    "thumbnailStatic": "/thumbnails/sequence-advanced.svg",
+    "description": "Extremely detailed three-pillar sequence mapping edge telemetry, idempotent validation pipelines, and reflective AI-agent RAG synthesis.",
+    "useCases": [
+      "AI Engineering",
+      "Telemetry Ingestion",
+      "Edge Computing"
+    ]
+  },
+  {
     "id": "zenuml",
     "title": "ZenUML Sequence",
     "category": "Integration",
@@ -363,6 +391,20 @@
     "useCases": [
       "State Management",
       "Pipeline Logic"
+    ]
+  },
+  {
+    "id": "state-diagramV2",
+    "title": "MLOps Lifecycle State Diagram",
+    "category": "Logic",
+    "thumbnailSvg": "dynamic",
+    "path": "/templates/state-diagramV2.mmd",
+    "thumbnailStatic": "/thumbnails/state.svg",
+    "description": "Advanced state machine representing offline training, dataset runs, online observability, and evaluation environments.",
+    "useCases": [
+      "MLOps",
+      "State Management",
+      "System Design"
     ]
   },
   {

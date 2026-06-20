@@ -20,6 +20,8 @@ export default function TemplateSelect({ onSelect }: Props) {
     setTemplates([
       { name: "📊 Flowchart (advanced)", path: "/mermaid-designer/templates/flowchart_advanced.mmd" },
       { name: "🔄 Sequence diagram", path: "/mermaid-designer/templates/sequence.mmd" },
+      { name: "🔄 Sequence diagram (MLOps)", path: "/mermaid-designer/templates/sequence-diag.mmd" },
+      { name: "🔄 Sequence diagram (Autonomous Edge)", path: "/mermaid-designer/templates/sequence-diagV2.mmd" },
       { name: "📅 Gantt chart", path: "/mermaid-designer/templates/gantt.mmd" },
       { name: "🏛️ Architecture", path: "/mermaid-designer/templates/architecture.mmd" },
       { name: "📦 Block diagram", path: "/mermaid-designer/templates/block.mmd" },
@@ -27,6 +29,7 @@ export default function TemplateSelect({ onSelect }: Props) {
       { name: "📦 C4 Container", path: "/mermaid-designer/templates/c4container.mmd" },
       { name: "🏷️ Class diagram", path: "/mermaid-designer/templates/class.mmd" },
       { name: "🗄️ Entity Relationship", path: "/mermaid-designer/templates/er.mmd" },
+      { name: "⚡ Event Modeling", path: "/mermaid-designer/templates/evtmodeling.mmd" },
       { name: "🌿 Git Graph", path: "/mermaid-designer/templates/git.mmd" },
       { name: "🐟 Ishikawa", path: "/mermaid-designer/templates/ishikawa.mmd" },
       { name: "🦴 Ishikawa (beta)", path: "/mermaid-designer/templates/ishikawa_beta.mmd" },
@@ -39,6 +42,7 @@ export default function TemplateSelect({ onSelect }: Props) {
       { name: "📝 Requirement", path: "/mermaid-designer/templates/requirement.mmd" },
       { name: "🌊 Sankey diagram", path: "/mermaid-designer/templates/sankey.mmd" },
       { name: "⚙️ State diagram", path: "/mermaid-designer/templates/state.mmd" },
+      { name: "⚙️ State diagram (advanced)", path: "/mermaid-designer/templates/state-diagramV2.mmd" },
       { name: "⏳ Timeline", path: "/mermaid-designer/templates/timeline.mmd" },
       { name: "⏳ Timeline (advanced)", path: "/mermaid-designer/templates/timeline-advanced.mmd" },
       { name: "🌲 TreeView", path: "/mermaid-designer/templates/treeview.mmd" },
@@ -48,8 +52,7 @@ export default function TemplateSelect({ onSelect }: Props) {
       { name: "⚪ Venn diagram", path: "/mermaid-designer/templates/venn.mmd" },
       { name: "🗺️ Wardley Map", path: "/mermaid-designer/templates/wardley.mmd" },
       { name: "📈 XY Chart", path: "/mermaid-designer/templates/xychart.mmd" },
-      { name: "📜 ZenUML", path: "/mermaid-designer/templates/zenuml.mmd" },
-      { name: "⚡ Event Modeling", path: "/mermaid-designer/templates/evtmodeling.mmd" },
+      { name: "📜 ZenUML", path: "/mermaid-designer/templates/zenuml.mmd" }
     ]);
   }, []);
 

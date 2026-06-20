@@ -6,15 +6,19 @@ import html2canvas from "html2canvas";
 type Props = {
   code: string;
   onLoad?: (text: string) => void;
+  filename: string;
+  setFilename: (name: string) => void;
 };
 
-export default function ActionBar({ code, onLoad }: Props) {
+export default function ActionBar({ code, onLoad, filename, setFilename }: Props) {
   //const previewRef = React.useRef<HTMLDivElement>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    const baseName = file.name.replace(/\.[^/.]+$/, "");
+    setFilename(baseName);
     const reader = new FileReader();
     reader.onload = (event) => {
       const text = event.target?.result as string;
@@ -33,10 +37,12 @@ export default function ActionBar({ code, onLoad }: Props) {
   };
 
   const downloadMMD = () => {
-    downloadBlob(new Blob([code], { type: "text/plain" }), "diagram.mmd");
+    const name = filename.trim() || "diagram";
+    downloadBlob(new Blob([code], { type: "text/plain" }), `${name}.mmd`);
   };
 
   const downloadSVG = () => {
+    const name = filename.trim() || "diagram";
     const svgEl = document.querySelector(".mermaid-container svg");
     if (!svgEl) {
       console.warn("SVG element not found inside .mermaid-container");
@@ -44,10 +50,11 @@ export default function ActionBar({ code, onLoad }: Props) {
     }
     const serializer = new XMLSerializer();
     const svgString = serializer.serializeToString(svgEl);
-    downloadBlob(new Blob([svgString], { type: "image/svg+xml" }), "diagram.svg");
+    downloadBlob(new Blob([svgString], { type: "image/svg+xml" }), `${name}.svg`);
   };
 
   const downloadPNG = async () => {
+    const name = filename.trim() || "diagram";
     // Target the container instead of the SVG directly to avoid html2canvas cloning bugs
     const container = document.querySelector(".mermaid-container") as HTMLElement;
     if (!container) {
@@ -66,7 +73,7 @@ export default function ActionBar({ code, onLoad }: Props) {
       const dataUrl = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.href = dataUrl;
-      downloadLink.download = "diagram.png";
+      downloadLink.download = `${name}.png`;
       downloadLink.click();
     } catch (err) {
       console.error("Failed to export PNG:", err);
@@ -98,6 +105,14 @@ export default function ActionBar({ code, onLoad }: Props) {
       >
         📂 Load
       </button>
+
+      <input
+        type="text"
+        value={filename}
+        onChange={(e) => setFilename(e.target.value)}
+        placeholder="Filename"
+        className="px-2 py-1 text-sm bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500 w-36 font-sans transition-all"
+      />
 
       <button
         className="px-2 py-1 text-sm bg-primary text-slate-900 dark:text-white rounded hover:opacity-90"

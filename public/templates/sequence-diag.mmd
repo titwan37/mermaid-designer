@@ -1,0 +1,36 @@
+sequenceDiagram
+    %% Define the Offline Environment Box
+    box rgba(38, 21, 161, 0.2) Offline
+        participant D as Datasets
+        participant R as Dataset Runs
+        participant OE as Offline Evals
+    end
+
+    %% Define the Online Environment Box
+    box rgba(5, 201, 41, 0.39) Online
+        participant OB as Observability
+        participant ONE as Online Evals
+    end
+
+    %% Offline Phase Interactions
+    Note over D: • Happy path<br>• Edge cases<br>• Adversarial Input
+    D->>R: Loop Application through Datasets
+    
+    Note over R: • Test model, prompt, tool,<br>code changes
+    R->>OE: Execute Evaluations
+    
+    Note over OE: • Manual Annotation<br>• LLM-as-a-Judge<br>• Custom via API/SDK
+    OE-->>R: Fix Issues (Local Loop)
+    
+    %% Transition to Online
+    OE->>OB: Deploy
+    
+    %% Online Phase Interactions
+    Note over OB: • Capture Traces<br>• Debugging<br>• Manual Review
+    OB->>ONE: Monitor Output
+    
+    Note over ONE: • Manual Annotation<br>• LLM-as-a-Judge<br>• Custom via API/SDK<br>• User Feedback
+    
+    %% Feedback Loops back to Offline
+    ONE-->>R: Fix Issues (Production Bug)
+    ONE->>D: Add Test cases from real data

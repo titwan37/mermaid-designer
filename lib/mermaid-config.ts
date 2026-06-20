@@ -16,6 +16,16 @@ export const initMermaid = async () => {
                 htmlLabels: true,
                 curve: 'basis',
             },
+            sequence: {
+                actorMargin: 50,
+                width: 150,
+                height: 65,
+                boxMargin: 15,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35,
+                mirrorActors: false,
+            },
             // @ts-ignore - look property is valid in v11 but might not be in all type versions
             look: 'handDrawn'
         });

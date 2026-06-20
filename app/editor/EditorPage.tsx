@@ -10,6 +10,8 @@ import { ThemeContext } from "../layout";
 import debounce from "lodash.debounce";
 import ErrorBoundary from "./utils/errorBoundary";
 import Link from "next/link";
+import { registerMermaidAutocomplete, registerInlineAICompletions } from "./utils/monacoProviders";
+import ConsoleLog from "./components/ConsoleLog";
 
 const DEFAULT_MMD = `---
 config:
@@ -27,11 +29,68 @@ flowchart LR
     G:::gov
     F:::gov`;
 
+async function getMermaidLiveUrl(code: string): Promise<string> {
+  try {
+    const state = {
+      code,
+      mermaid: JSON.stringify({ theme: "default" }, null, 2),
+      autoSync: true,
+      updateDiagram: true
+    };
+    const jsonStr = JSON.stringify(state);
+    
+    if (typeof window !== "undefined" && "CompressionStream" in window) {
+      const stream = new Blob([jsonStr]).stream();
+      const compressedStream = stream.pipeThrough(new (window as any).CompressionStream("deflate-raw"));
+      const compressedBlob = await new Response(compressedStream).blob();
+      const buffer = await compressedBlob.arrayBuffer();
+      
+      const bytes = new Uint8Array(buffer);
+      let binary = "";
+      for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      const base64 = btoa(binary)
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=/g, "");
+        
+      return `https://mermaid.live/edit#pako:${base64}`;
+    }
+  } catch (err) {
+    console.error("Failed to compress for mermaid.live:", err);
+  }
+  return `https://mermaid.live/edit`;
+}
+
 export default function EditorPage({ initialMMD }: { initialMMD?: string }) {
   const { dark, toggle, mounted } = React.useContext(ThemeContext);
   const [editorValue, setEditorValue] = React.useState<string>(initialMMD ?? DEFAULT_MMD);
   const [code, setCode] = React.useState<string>(initialMMD ?? DEFAULT_MMD);
   const [error, setError] = React.useState<string | null>(null);
+  const [dragActive, setDragActive] = React.useState(false);
+  const [filename, setFilename] = React.useState<string>("diagram");
+
+  const providersRef = React.useRef<{ dispose: () => void }[]>([]);
+
+  const handleEditorMount = React.useCallback((editor: any, monaco: any) => {
+    // Clean up any existing registered providers first
+    providersRef.current.forEach((p: any) => p.dispose());
+    providersRef.current = [];
+
+    // Register new providers
+    const completionProvider = registerMermaidAutocomplete(monaco);
+    const inlineCompletionProvider = registerInlineAICompletions(monaco);
+
+    providersRef.current.push(completionProvider, inlineCompletionProvider);
+  }, []);
+
+  React.useEffect(() => {
+    return () => {
+      providersRef.current.forEach((p: any) => p.dispose());
+      providersRef.current = [];
+    };
+  }, []);
 
   const debouncedSetCode = React.useCallback(
     debounce((value: string) => setCode(value), 500),
@@ -42,6 +101,36 @@ export default function EditorPage({ initialMMD }: { initialMMD?: string }) {
     if (value !== undefined) {
       setEditorValue(value);
       debouncedSetCode(value);
+    }
+  };
+
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const file = e.dataTransfer.files[0];
+      const baseName = file.name.replace(/\.[^/.]+$/, "");
+      setFilename(baseName);
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const text = event.target?.result;
+        if (typeof text === "string") {
+          loadText(text);
+        }
+      };
+      reader.readAsText(file);
     }
   };
 
@@ -123,14 +212,18 @@ export default function EditorPage({ initialMMD }: { initialMMD?: string }) {
             <Clock />
           </p>
         </div>
-        <ActionBar code={code} onLoad={loadText} />
+        <ActionBar code={code} onLoad={loadText} filename={filename} setFilename={setFilename} />
       </header>
 
       <main className={`flex flex-1 overflow-hidden relative ${isResizing ? "cursor-col-resize select-none" : ""}`}>
         {/* Editor */}
         <section
           style={{ width: `${splitPercent}%` }}
-          className="h-full border-r border-gray-200 dark:border-gray-700"
+          className="h-full border-r border-gray-200 dark:border-gray-700 relative"
+          onDragEnter={handleDrag}
+          onDragOver={handleDrag}
+          onDragLeave={handleDrag}
+          onDrop={handleDrop}
         >
           <Editor
             height="100%"
@@ -138,13 +231,43 @@ export default function EditorPage({ initialMMD }: { initialMMD?: string }) {
             value={editorValue}
             theme={dark ? "vs-dark" : "light"}
             onChange={handleEditorChange}
+            onMount={handleEditorMount}
             options={{
               minimap: { enabled: false },
               fontSize: 14,
               lineNumbers: "on",
               wordWrap: "on",
+              inlineSuggest: {
+                enabled: true,
+              },
             }}
           />
+
+          {dragActive && (
+            <div
+              className="absolute inset-0 bg-emerald-500/10 dark:bg-emerald-500/20 border-2 border-dashed border-emerald-500 backdrop-blur-[2px] flex flex-col items-center justify-center z-50 transition-all duration-300"
+              onDragEnter={handleDrag}
+              onDragOver={handleDrag}
+              onDragLeave={handleDrag}
+              onDrop={handleDrop}
+            >
+              <div className="p-6 bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-emerald-100 dark:border-emerald-900/50 flex flex-col items-center space-y-3 animate-in fade-in zoom-in-95 duration-200">
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-950/50 rounded-full">
+                  <svg className="w-8 h-8 text-emerald-500 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                </div>
+                <div className="text-center">
+                  <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                    Drop your Mermaid (.mmd) file
+                  </p>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                    Release to import directly into the editor
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Resizer Handle */}
@@ -162,14 +285,44 @@ export default function EditorPage({ initialMMD }: { initialMMD?: string }) {
             <MermaidViewer mmd={code} setError={setError} />
           </ErrorBoundary>
           {error && (
-            <div className="absolute inset-0 bg-black/30 flex items-center justify-center p-4 z-40">
-              <pre className="bg-white dark:bg-gray-800 text-red-600 p-4 rounded shadow-lg max-w-full overflow-auto">
-                {error}
-              </pre>
+            <div className="absolute inset-0 bg-black/45 backdrop-blur-sm flex items-center justify-center p-6 z-40 animate-in fade-in duration-200">
+              <div className="bg-white dark:bg-zinc-900 border border-red-200 dark:border-zinc-800 rounded-xl shadow-2xl p-6 max-w-lg w-full flex flex-col space-y-4">
+                <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
+                  <span className="text-xl">⚠️</span>
+                  <h3 className="font-bold text-base font-sans">Mermaid Syntax Error</h3>
+                </div>
+                
+                <div className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-950/50 rounded-lg text-xs text-red-700 dark:text-red-300 font-mono overflow-auto max-h-40 leading-relaxed whitespace-pre-wrap">
+                  {error}
+                </div>
+                
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans">
+                  A syntax error occurred during rendering. You can check the code structure above or debug it with full syntax visualization in the official Mermaid Live Editor.
+                </p>
+
+                <div className="flex space-x-3 pt-2 font-sans">
+                  <button
+                    onClick={async () => {
+                      const url = await getMermaidLiveUrl(code);
+                      window.open(url, "_blank");
+                    }}
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-center"
+                  >
+                    🚀 Open & Debug on Mermaid.live
+                  </button>
+                  <button
+                    onClick={() => setError(null)}
+                    className="px-4 py-2 bg-zinc-100 dark:bg-zinc-850 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium rounded-lg transition-colors duration-200"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </section>
       </main>
+      <ConsoleLog />
     </div>
   );
 }

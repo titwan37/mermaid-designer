@@ -1,0 +1,48 @@
+---
+config:
+  theme: neutral
+---
+stateDiagram-v2
+    direction TB
+
+    %% Offline Environment defined as a composite state
+    state "Offline Environment" as Offline {
+        direction LR
+        
+        state "Datasets
+        • Happy path
+        • Edge cases
+        • Adversarial Input" as Datasets
+        state "Dataset Runs
+        • Loop Application through Datasets
+        • Test model, prompt, code changes" as Runs
+        state "Offline Evals
+        • Manual Annotation
+        • LLM-as-a-Judge
+        • Custom API/SDK" as OffEvals
+
+        Datasets --> Runs
+        Runs --> OffEvals
+        OffEvals --> Runs: Fix Issues
+    }
+
+    %% Online Environment defined as a composite state
+    state "Online Environment" as Online {
+        direction RL
+        
+        state "Observability
+        • Capture Traces
+        • Debugging
+        • Manual Review" as Obs
+        state "Online Evals
+        • Manual Annotation
+        • LLM-as-a-Judge
+        • User Feedback" as OnEvals
+
+        Obs --> OnEvals
+    }
+
+    %% Transitions crossing the boundary between environments
+    OffEvals --> Obs: Deploy
+    OnEvals --> Runs: Fix Issues
+    OnEvals --> Datasets: Add Test cases from real data

@@ -1,0 +1,68 @@
+sequenceDiagram
+    autonumber
+    
+    %% Define the Client / Workspace Zone (Light Blue)
+    box rgba(13, 13, 193, 0.75) Client & Interface
+        actor Scientist as Scientist / PI
+        participant UI as WASM Workspace UI
+    end
+
+    %% Define the Edge Telemetry Zone (Light Red/Orange)
+    box rgba(142, 66, 18, 0.81) Edge Environment
+        participant Telemetry as Telemetry Daemons (C++17)
+        participant Anomaly as Edge Anomaly Engine
+    end
+
+    %% Define the Ops & Storage Zone (Light Green)
+    box rgba(5, 115, 5, 0.61) Data & Lineage Mesh
+        participant Pipeline as Validation Pipeline (BDD)
+        participant Vector as Vector Storage Mesh
+    end
+
+    %% Define the AI Engine Zone (Light Purple)
+    box rgba(115, 10, 194, 0.50) AI Engine
+        participant Agent as Reflective AI Agent
+    end
+
+    %% Pillar 1
+    Note over Scientist, Anomaly: PILLAR 1: LOW-LEVEL EDGE TELEMETRY & INGESTION
+    Scientist->+UI: InitiateRun()
+    UI->+Telemetry: StartLogging()
+    
+    loop Every 100 Microseconds
+        Telemetry->>Telemetry: QueryKernelProc() (/proc)
+        Telemetry->>+Anomaly: StreamSharedMemory()
+        Anomaly->>Anomaly: ComputeRollingZScore()
+        alt Out of Safe Boundaries
+            Anomaly-->>Scientist: SystemAlert(Throttling Beam)
+        end
+        deactivate Anomaly
+    end
+    deactivate Telemetry
+    deactivate UI
+
+    %% Pillar 2
+    Note over Scientist, Vector: PILLAR 2: IDEMPOTENT RESEARCH-OPS & LINEAGE
+    Scientist->+Pipeline: ExecutePipelineCheck()
+    Pipeline->>Pipeline: RunGherkinTests() (Behave)
+    Pipeline->>Pipeline: CalculateSHA256()
+    Pipeline->>+Vector: StoreImmutableAsset()
+    deactivate Vector
+    deactivate Pipeline
+
+    %% Pillar 3
+    Note over Scientist, Agent: PILLAR 3: REFLECTIVE GENERATIVE KNOWLEDGE MESH
+    Scientist->+UI: RequestSynthesis()
+    UI->+Agent: TriggerRAGPipeline()
+    Agent->>+Vector: QueryContextVectors()
+    Vector-->>-Agent: Dense Context Matches
+    
+    loop Until Citations Match Ground Truth
+        Agent->>Agent: DraftBaselineText()
+        Agent->>Agent: VerifyAssertions()
+    end
+    
+    Agent-->>UI: Stream Validated LaTeX & Mermaid
+    deactivate Agent
+    UI->>UI: RenderLocalWASM() (BusyTeX)
+    UI-->>-Scientist: Display Verified Publication Draft

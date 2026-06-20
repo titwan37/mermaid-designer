@@ -1,2 +1,7 @@
-# wsl ANSIBLE_CONFIG=./ansible.cfg ANSIBLE_CALLBACK_RESULT_FORMAT=yaml ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini deploy.yml --private-key=~/ionos_sec_ed25519
-wsl ANSIBLE_CONFIG=./ansible.cfg ANSIBLE_CALLBACK_RESULT_FORMAT=yaml ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini deploy.yml --private-key=~/ionos_sec_ed25519
+# Delegate to the master hub deployment script
+Push-Location "$PSScriptRoot\..\hub"
+try {
+    powershell.exe -File .\deploy_mermaid.ps1
+} finally {
+    Pop-Location
+}

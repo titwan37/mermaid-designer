@@ -1,7 +1,11 @@
 // lib/templateData.ts
 import templateJson from "./templates.json";
 
-/** Strict contract for every template that the gallery can display */
+/** 
+ * Strict contract for every template that the gallery can display.
+ * Includes support for state machine templates (e.g. Model State Machine, MLOps Lifecycle state-diagramV2)
+ * and sequence diagram templates (e.g. API Sequence, MLOps Lifecycle, and Autonomous Edge/AI Engine).
+ */
 export interface MermaidTemplate {
   /** Unique identifier – used in URLs */
   id: string;

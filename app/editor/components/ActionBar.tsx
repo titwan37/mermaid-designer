@@ -75,8 +75,9 @@ export default function ActionBar({ code, onLoad, filename, setFilename }: Props
       downloadLink.href = dataUrl;
       downloadLink.download = `${name}.png`;
       downloadLink.click();
-    } catch (err) {
-      console.error("Failed to export PNG:", err);
+    } catch (err: any) {
+      const safeError = err?.message || String(err);
+      console.error("Failed to export PNG:", safeError);
     }
   };
 

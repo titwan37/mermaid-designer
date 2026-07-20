@@ -175,17 +175,22 @@ export function registerInlineAICompletions(monaco: Monaco) {
             isQueryInFlight = false;
 
             if (!response.ok) {
-              if (response.status === 404) {
-                throw new Error(`status 404 (Not Found). Nginx subpath routing issue at "${apiUrl}".`);
-              }
-              let serverError = "";
+              let errData: any = {};
+              let isJson = false;
               try {
-                const errData = await response.json();
-                serverError = errData.error || JSON.stringify(errData);
+                errData = await response.json();
+                isJson = true;
               } catch {
-                serverError = await response.text();
+                errData = { error: await response.text() };
               }
-              throw new Error(`status ${response.status}. Server response: "${serverError || "No details"}"`);
+
+              let serverError = errData.error || JSON.stringify(errData);
+
+              if (response.status === 404 && !isJson) {
+                throw new Error(`status 404 (Not Found). Nginx subpath routing issue at "${apiUrl}".`);
+              } else {
+                throw new Error(`status ${response.status}: ${serverError}`);
+              }
             }
 
             const data = await response.json();
@@ -222,6 +227,6 @@ export function registerInlineAICompletions(monaco: Monaco) {
         }, 3000); // 3000ms (3 seconds) idle delay before invoking API
       });
     },
-    freeInlineCompletions: () => {},
+    freeInlineCompletions: () => { },
   });
 }

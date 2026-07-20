@@ -36,8 +36,9 @@ function HomeContent() {
           setPreloadedCode(text);
           setLoading(false);
         })
-        .catch((err) => {
-          console.error("Failed to load template:", err);
+        .catch((err: any) => {
+          const safeError = err?.message || String(err);
+          console.error("Failed to load template:", safeError);
           setLoading(false);
         });
     }

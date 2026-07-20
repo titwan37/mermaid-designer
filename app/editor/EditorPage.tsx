@@ -57,8 +57,9 @@ async function getMermaidLiveUrl(code: string): Promise<string> {
         
       return `https://mermaid.live/edit#pako:${base64}`;
     }
-  } catch (err) {
-    console.error("Failed to compress for mermaid.live:", err);
+  } catch (err: any) {
+    const safeError = err?.message || String(err);
+    console.error("Failed to compress for mermaid.live:", safeError);
   }
   return `https://mermaid.live/edit`;
 }

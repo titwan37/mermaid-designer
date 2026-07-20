@@ -1,8 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
+  const dashscopeKey = process.env.DASHSCOPE_API_KEY3 || process.env.DASHSCOPE_API_KEY;
   const openrouterKey = process.env.OPENROUTER_API_KEY;
-  const currentProvider = openrouterKey ? "openrouter" : "ollama";
+  
+  let currentProvider = "ollama";
+  if (dashscopeKey) {
+    currentProvider = "dashscope";
+  } else if (openrouterKey) {
+    currentProvider = "openrouter";
+  }
 
   try {
     const { prefix, suffix } = await req.json();
@@ -13,7 +20,52 @@ export async function POST(req: NextRequest) {
       controller.abort();
     });
 
-    // --- CASE A: OPENROUTER CLOUD ENGINE ---
+    // --- CASE A: DASHSCOPE CLOUD ENGINE ---
+    if (dashscopeKey) {
+      const dashscopeEndpoint = process.env.DASHSCOPE_OPENAI_COMPATIBLE_ENDPOINT || "https://dashscope.aliyuncs.com/compatible-mode/v1";
+      const endpoint = dashscopeEndpoint.endsWith("/chat/completions") 
+        ? dashscopeEndpoint 
+        : `${dashscopeEndpoint.replace(/\/+$/, "")}/chat/completions`;
+      const model = process.env.DASHSCOPE_MODEL || "qwen3.6-plus-2026-04-02";
+      const systemPrompt = "You are a Mermaid.js diagram generator. Your job is to autocomplete the code. Continue the user's diagram based on the prefix and suffix. Output ONLY the code continuation. No markdown blocks, no explanations, no prefix repetition. If nothing is needed, return empty.";
+      const userPrompt = `--- PREFIX ---\n${prefix}\n--- SUFFIX ---\n${suffix}`;
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${dashscopeKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt }
+          ],
+          temperature: 0.1,
+          max_tokens: 48,
+        }),
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        return NextResponse.json(
+          { 
+            error: `Dashscope failed: status ${response.status} - ${errorText}`, 
+            provider: "dashscope" 
+          },
+          { status: response.status }
+        );
+      }
+
+      const result = await response.json();
+      const text = result.choices?.[0]?.message?.content || "";
+      let suggestion = text.replace(/^```[a-z]*\n/i, "").replace(/\n```$/, "").trim();
+      return NextResponse.json({ suggestion, provider: "dashscope" });
+    }
+
+    // --- CASE B: OPENROUTER CLOUD ENGINE ---
     if (openrouterKey) {
       const model = process.env.OPENROUTER_MODEL || "qwen/qwen-2.5-coder-32b-instruct";
       const systemPrompt = "You are a Mermaid.js diagram generator. Your job is to autocomplete the code. Continue the user's diagram based on the prefix and suffix. Output ONLY the code continuation. No markdown blocks, no explanations, no prefix repetition. If nothing is needed, return empty.";

@@ -4,10 +4,16 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { initMermaid } from '../lib/mermaid-config'; // Added [cite: 11]
+import { setupConsoleSanitizer } from '../lib/sanitizeConsole';
 import * as React from "react";
 
 
 const inter = Inter({ subsets: ["latin"] });
+
+// Run the sanitizer as early as possible on the client side
+if (typeof window !== 'undefined') {
+  setupConsoleSanitizer();
+}
 
 export const ThemeContext = React.createContext<{ dark: boolean; toggle: () => void; mounted: boolean }>({
   dark: false,

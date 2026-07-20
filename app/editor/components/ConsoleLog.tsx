@@ -59,33 +59,38 @@ export default function ConsoleLog() {
         );
       } else {
         setStatus("error");
-        if (res.status === 404) {
+        let errorMsg = "";
+        let provider = "ollama";
+        let isJson = false;
+        try {
+          const data = await res.json();
+          errorMsg = data.error || JSON.stringify(data);
+          provider = data.provider || "ollama";
+          isJson = true;
+        } catch {
+          errorMsg = await res.text();
+        }
+
+        if (res.status === 404 && !isJson) {
           addLog(
             "error",
-            `Backend health check failed: status 404 (Not Found) at ${apiUrl}. The Next.js app is running, but the subpath mapping is incorrect or missing. Verify that '/mermaid-designer' prefix is routed correctly by Nginx.`
+            `Backend health check failed: status 404 (Not Found) at ${apiUrl}. The Next.js API route is missing or Nginx subpath routing is incorrect.`
+          );
+        } else if (provider === "dashscope") {
+          addLog(
+            "error",
+            `Dashscope Cloud Engine error (status ${res.status}): "${errorMsg}". Verify DASHSCOPE_API_KEY and model in .env.`
+          );
+        } else if (provider === "openrouter") {
+          addLog(
+            "error",
+            `OpenRouter Cloud Engine error (status ${res.status}): "${errorMsg}". Please verify your OPENROUTER_API_KEY in the server's .env file, internet connectivity, or OpenRouter credits.`
           );
         } else {
-          let errorMsg = "";
-          let provider = "ollama";
-          try {
-            const data = await res.json();
-            errorMsg = data.error || JSON.stringify(data);
-            provider = data.provider || "ollama";
-          } catch {
-            errorMsg = await res.text();
-          }
-
-          if (provider === "openrouter") {
-            addLog(
-              "error",
-              `OpenRouter Cloud Engine error (status ${res.status}): "${errorMsg}". Please verify your OPENROUTER_API_KEY in the server's .env file, internet connectivity, or OpenRouter credits.`
-            );
-          } else {
-            addLog(
-              "error",
-              `Ollama Local Engine error (status ${res.status}): "${errorMsg}". Please check if the Ollama daemon is active, or if you meant to use OpenRouter but forgot to set OPENROUTER_API_KEY in the server's .env file.`
-            );
-          }
+          addLog(
+            "error",
+            `Ollama Local Engine error (status ${res.status}): "${errorMsg}". Please check if the Ollama daemon is active.`
+          );
         }
       }
     } catch (err: any) {
@@ -118,7 +123,7 @@ export default function ConsoleLog() {
     };
 
     window.addEventListener("autocomplete-log", handleLogEvent);
-    
+
     const timer = setTimeout(() => {
       checkStatus();
     }, 600);
@@ -156,9 +161,8 @@ export default function ConsoleLog() {
 
   return (
     <div
-      className={`fixed bottom-0 right-4 z-50 flex flex-col bg-zinc-950/90 dark:bg-zinc-950/95 backdrop-blur-md border border-zinc-800 text-zinc-300 rounded-t-lg shadow-2xl transition-all duration-250 ${
-        isOpen ? "w-[500px] h-[340px]" : "w-64 h-9 cursor-pointer hover:bg-zinc-900/90"
-      }`}
+      className={`fixed bottom-0 right-4 z-50 flex flex-col bg-zinc-950/90 dark:bg-zinc-950/95 backdrop-blur-md border border-zinc-800 text-zinc-300 rounded-t-lg shadow-2xl transition-all duration-250 ${isOpen ? "w-[500px] h-[340px]" : "w-64 h-9 cursor-pointer hover:bg-zinc-900/90"
+        }`}
       onClick={() => !isOpen && setIsOpen(true)}
     >
       {/* Header */}
